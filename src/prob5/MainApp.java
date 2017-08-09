@@ -1,10 +1,13 @@
 package prob5;
 
 public class MainApp {
+	public static void test(MyStack<? extends Number> number) {
+		
+	}
 
 	public static void main(String[] args) {
 		try {
-			MyStack stack = new MyStack(5);
+			MyStack<String> stack = new MyStack<String>(3);
 			stack.push("Hello");
 			stack.push("World");
 			stack.push("!!!");
@@ -22,16 +25,26 @@ public class MainApp {
 
 			System.out.println("======================================");
 
-			stack = new MyStack(3);
+			stack = new MyStack<String>(3);
 			stack.push("Hello");
 
 			System.out.println(stack.pop());
 			System.out.println(stack.pop());
+			
+			// generic 객체 생성(와일드 카드를 사용해서 제너릭 타입 제한하기)
+//			MyStack<?> objectStack = new MyStack<String>(10);
+			
+			/*** 에러 ***/
+//			MyStack<? extends Number> objectStack = new MyStack<Integer>(10);
+//			objectStack.push(new Integer(10));
+			
+			/*** 가능 ***/ // -> 그 이유는??
+			MyStack<? extends Number> objectStack = new MyStack<Integer>(10);
+			test(objectStack);
 			
 		} catch ( MyStackException ex) {
 			System.out.println( ex );
 		}
 
 	}
-
 }
